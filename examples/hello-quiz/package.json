@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "dev": "katnip dev"
+  },
+  "name": "hello-quiz",
+  "version": "1.0.0",
+  "type": "module",
+  "dependencies": {
+    "katnip-quickmin": "^3.0.36",
+    "katnip-tailwind": "^3.0.24",
+    "katnip-quiz": "^1.0.0"
+  }
+}

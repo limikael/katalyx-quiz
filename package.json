@@ -1,0 +1,19 @@
+{
+  "name": "katnip-quiz",
+  "version": "1.0.2",
+  "license": "MIT",
+  "type": "module",
+  "scripts": {},
+  "keywords": [
+    "katnip-plugin"
+  ],
+  "exports": {
+    "./katnip-components": "./src/exports.jsx",
+    "./katnip-snippets": "./src/snippets.js"
+  },
+  "dependencies": {
+    "katnip-components": "^3.0.11",
+    "katnip-quickmin": "^3.0.39",
+    "use-feather": "^1.0.3"
+  }
+}

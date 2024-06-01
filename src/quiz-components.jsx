@@ -37,6 +37,7 @@ export function QuizEnv({completeModal, children}) {
 }
 
 QuizEnv.editorPreview=props=><>{props.children}</>;
+QuizEnv.category="Quiz";
 QuizEnv.controls={
 	completeModal: {type: "block"}
 }
@@ -50,6 +51,7 @@ export function QuizCarouselQuestions({children}) {
 }
 
 QuizCarouselQuestions.editorPreview=props=><>{props.children}</>;
+QuizCarouselQuestions.category="Quiz";
 
 export function QuizForQuestions({children}) {
 	return (
@@ -60,6 +62,7 @@ export function QuizForQuestions({children}) {
 }
 
 QuizForQuestions.editorPreview=props=><>{props.children}</>;
+QuizForQuestions.category="Quiz";
 
 export function QuizAlternativeButton({class: className, children}) {
 	let questionId=useVal("questions:id");
@@ -83,6 +86,7 @@ export function QuizAlternativeButton({class: className, children}) {
 
 QuizAlternativeButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizAlternativeButton.styling=true;
+QuizAlternativeButton.category="Quiz";
 
 function AlternativeEnv({children}) {
 	let questionId=useVal("questions:id");
@@ -109,6 +113,7 @@ export function QuizForAlternatives({children}) {
 }
 
 QuizForAlternatives.editorPreview=props=><>{props.children}</>;
+QuizForAlternatives.category="Quiz";
 
 export function QuizPrevButton({children, ...props}) {
 	let quizQuestionIndexVar=useVar("quizQuestionIndex");
@@ -127,6 +132,7 @@ export function QuizPrevButton({children, ...props}) {
 
 QuizPrevButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizPrevButton.styling=true;
+QuizPrevButton.category="Quiz";
 
 export function QuizNextButton({children, ...props}) {
 	let env=useEnv();
@@ -155,6 +161,7 @@ export function QuizNextButton({children, ...props}) {
 
 QuizNextButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizNextButton.styling=true;
+QuizNextButton.category="Quiz";
 
 export function QuizEmailInput({...props}) {
 	return (
@@ -164,6 +171,7 @@ export function QuizEmailInput({...props}) {
 
 QuizEmailInput.editorPreview=props=><input {...props} value={"$email"}/>;
 QuizEmailInput.styling=true;
+QuizEmailInput.category="Quiz";
 
 export function QuizSubmitButton({children, href, ...props}) {
 	let email=useVal("quizEmail");
@@ -202,6 +210,7 @@ export function QuizSubmitButton({children, href, ...props}) {
 
 QuizSubmitButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizSubmitButton.styling=true;
+QuizSubmitButton.category="Quiz";
 QuizSubmitButton.controls={
 	href: {}
 }

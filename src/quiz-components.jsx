@@ -41,6 +41,10 @@ QuizEnv.category="Quiz";
 QuizEnv.controls={
 	completeModal: {type: "block"}
 }
+QuizEnv.icon = {
+	type: "material",
+	symbol: "inbox_customize"
+}
 
 export function QuizCarouselQuestions({children}) {
 	return (
@@ -52,6 +56,12 @@ export function QuizCarouselQuestions({children}) {
 
 QuizCarouselQuestions.editorPreview=props=><>{props.children}</>;
 QuizCarouselQuestions.category="Quiz";
+QuizCarouselQuestions.displayName="QuestionsCarousel"
+QuizCarouselQuestions.icon = {
+	type: "material",
+	symbol: "view_carousel"
+}
+
 
 export function QuizForQuestions({children}) {
 	return (
@@ -63,6 +73,13 @@ export function QuizForQuestions({children}) {
 
 QuizForQuestions.editorPreview=props=><>{props.children}</>;
 QuizForQuestions.category="Quiz";
+QuizForQuestions.displayName = "ProgressLoop";
+QuizForQuestions.icon = {
+	type: "material",
+	symbol: "steppers"
+}
+
+
 
 export function QuizAlternativeButton({class: className, children}) {
 	let questionId=useVal("questions:id");
@@ -87,6 +104,11 @@ export function QuizAlternativeButton({class: className, children}) {
 QuizAlternativeButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizAlternativeButton.styling=true;
 QuizAlternativeButton.category="Quiz";
+QuizAlternativeButton.displayName = "AnswerButton"
+QuizAlternativeButton.icon = {
+	type: "material",
+	symbol: "fact_check"
+}
 
 function AlternativeEnv({children}) {
 	let questionId=useVal("questions:id");
@@ -114,6 +136,12 @@ export function QuizForAlternatives({children}) {
 
 QuizForAlternatives.editorPreview=props=><>{props.children}</>;
 QuizForAlternatives.category="Quiz";
+QuizForAlternatives.displayName = "AnswersLoop";
+QuizForAlternatives.icon = {
+	type: "material",
+	symbol: "laps"
+}
+
 
 export function QuizPrevButton({children, ...props}) {
 	let quizQuestionIndexVar=useVar("quizQuestionIndex");
@@ -133,6 +161,11 @@ export function QuizPrevButton({children, ...props}) {
 QuizPrevButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizPrevButton.styling=true;
 QuizPrevButton.category="Quiz";
+QuizPrevButton.displayName = "Back";
+QuizPrevButton.icon = {
+	type: "material",
+	symbol: "switch_right"
+}
 
 export function QuizNextButton({children, ...props}) {
 	let env=useEnv();
@@ -162,6 +195,11 @@ export function QuizNextButton({children, ...props}) {
 QuizNextButton.editorPreview=props=><button class={props.class}>{props.children}</button>;
 QuizNextButton.styling=true;
 QuizNextButton.category="Quiz";
+QuizNextButton.displayName = "Next";
+QuizNextButton.icon = {
+	type: "material",
+	symbol: "switch_left"
+}
 
 export function QuizEmailInput({...props}) {
 	return (
@@ -172,6 +210,12 @@ export function QuizEmailInput({...props}) {
 QuizEmailInput.editorPreview=props=><input {...props} value={"$email"}/>;
 QuizEmailInput.styling=true;
 QuizEmailInput.category="Quiz";
+QuizEmailInput.displayName = "EmailInput";
+QuizEmailInput.icon = {
+	type: "material",
+	symbol: "alternate_email"
+}
+
 
 export function QuizSubmitButton({children, href, ...props}) {
 	let email=useVal("quizEmail");
@@ -213,4 +257,9 @@ QuizSubmitButton.styling=true;
 QuizSubmitButton.category="Quiz";
 QuizSubmitButton.controls={
 	href: {}
+}
+QuizSubmitButton.displayName = "Submit";
+QuizSubmitButton.icon = {
+	type: "material",
+	symbol: "send"
 }

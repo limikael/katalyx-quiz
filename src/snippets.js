@@ -118,7 +118,7 @@ export const QuizSnippetTwo = {
 	},
 	content: `
 		<QuizEnv completeModal="QuizDone">
-			<div class="p-10 bg-base h-full pt-16">
+			<div class="p-10 h-full pt-16 bg-gradient-to-b from-primary/30 to-secondary/30">
 				<div class="py-5 mx-auto">
 					<QuizCarouselQuestions>
 						<div class="text-center mb-10 max-w-6xl m-auto">
@@ -160,6 +160,5 @@ export const QuizSnippetTwo = {
 				</div>
 			</div>
 		</QuizEnv>
-	`
-
+		`
 }

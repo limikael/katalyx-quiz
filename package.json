@@ -9,7 +9,8 @@
   ],
   "exports": {
     "./katnip-components": "./src/exports.jsx",
-    "./katnip-snippets": "./src/snippets.js"
+    "./katnip-snippets": "./src/snippets.js",
+    "./katnip-project-hooks": "./src/katnip-quiz-project.js"
   },
   "dependencies": {
     "katnip-components": "^3.0.13",

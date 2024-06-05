@@ -1,4 +1,3 @@
-
 jwtSecret: "changeme"
 adminUser: "admin"
 adminPass: "admin"
@@ -7,17 +6,4 @@ apiPath: "admin"
 collections:
   questions:
     fields:
-      <Text id="question" listable fullWidth/>
-      <ReferenceMany id="alternatives" reference="alternatives" target="question_id"/>
-
-  alternatives:
-    category: hidden
-    fields:
-      <Reference id="question_id" reference="questions" disabled/>
-      <Text id="alternative" listable fullWidth/>
-
-  responses:
-    access: [admin,public]
-    fields:
-      <Text id="email" listable fullWidth/>
-      <Json id="answers" fullWidth/>
+      <Text id="more" listable/>

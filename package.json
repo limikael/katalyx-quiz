@@ -1,6 +1,6 @@
 {
   "name": "katnip-quiz",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "license": "MIT",
   "type": "module",
   "scripts": {},
@@ -12,7 +12,7 @@
     "./katnip-snippets": "./src/snippets.js"
   },
   "dependencies": {
-    "katnip-components": "^3.0.12",
+    "katnip-components": "^3.0.13",
     "katnip-quickmin": "^3.0.39",
     "use-feather": "^1.0.3"
   }

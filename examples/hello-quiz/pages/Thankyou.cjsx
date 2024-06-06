@@ -1,3 +1,0 @@
-<Page route="/thankyou">
-	thank you...
-</Page>

@@ -12,7 +12,7 @@
 			<QuizEmailInput class="border p-3 w-full"/>
 		</div>
 
-		<QuizSubmitButton class="p-3 bg-azure rounded mx-5 w-32" href="/thankyou">
+		<QuizSubmitButton class="p-3 bg-azure rounded mx-5 w-32" href="/result">
 			Get Results
 		</QuizSubmitButton>
 	</div>

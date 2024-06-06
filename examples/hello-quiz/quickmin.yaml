@@ -3,7 +3,7 @@ adminUser: "admin"
 adminPass: "admin"
 apiPath: "admin"
 
-collections:
-  questions:
-    fields:
-      <Text id="more" listable/>
+#collections:
+#  questions:
+#    fields:
+#      <Text id="more" listable/>

@@ -24,10 +24,16 @@ export function QuizEnv({completeModal, children}) {
 		quizCompleteModal: components[completeModal]
 	};
 
+	function createVarStates() {
+		return {
+			quizResult: new VarState({sessionStorageKey: "quizResult"})
+		}
+	}
+
 	let CompleteModal=components[completeModal];
 
 	return (
-		<Env declarations={declarations}>
+		<Env declarations={declarations} createVarStates={createVarStates}>
 			{children}
 			<Modal showVar="quizShowPopup">
 				<CompleteModal/>
@@ -42,6 +48,47 @@ QuizEnv.controls={
 	completeModal: {type: "block"}
 }
 QuizEnv.icon = {
+	type: "material",
+	symbol: "inbox_customize"
+}
+
+export function QuizResult({children}) {
+	function createVarStates() {
+		return {
+			quizResult: new VarState({sessionStorageKey: "quizResult"})
+		}
+	}
+
+	function QuizResultInner({children}) {
+		let result=useVal("quizResult");
+		if (!result)
+			result={
+				title: "No Result",
+				content: "No result yet"
+			};
+
+		return (
+			<Env declarations={result}>
+				{children}
+			</Env>
+		);
+	}
+
+	if (!globalThis.window)
+		return;
+
+	return (
+		<Env createVarStates={createVarStates}>
+			<QuizResultInner>
+				{children}
+			</QuizResultInner>
+		</Env>
+	);
+}
+
+QuizResult.editorPreview=props=><>{props.children}</>;
+QuizResult.category="Quiz";
+QuizResult.icon = {
 	type: "material",
 	symbol: "inbox_customize"
 }
@@ -78,8 +125,6 @@ QuizForQuestions.icon = {
 	type: "material",
 	symbol: "steppers"
 }
-
-
 
 export function QuizAlternativeButton({class: className, children}) {
 	let questionId=useVal("questions:id");
@@ -141,7 +186,6 @@ QuizForAlternatives.icon = {
 	type: "material",
 	symbol: "laps"
 }
-
 
 export function QuizPrevButton({children, ...props}) {
 	let quizQuestionIndexVar=useVar("quizQuestionIndex");
@@ -216,10 +260,10 @@ QuizEmailInput.icon = {
 	symbol: "alternate_email"
 }
 
-
 export function QuizSubmitButton({children, href, ...props}) {
 	let email=useVal("quizEmail");
 	let answers=useVal("quizAnswers");
+	let resultsVar=useVar("quizResult");
 	let qql=useQql();
 	let redirect=useRedirect();
 	let iso=useIsoContext();
@@ -233,15 +277,40 @@ export function QuizSubmitButton({children, href, ...props}) {
 			alternative: alternativesById[answers[q.id]]?.alternative,
 		}));
 
-		console.log(saveAnswers);
+		let saveScore=questions
+			.map(q=>{
+				let score=0;
+				let alternative=alternativesById[answers[q.id]];
+				if (alternative && alternative.score)
+					score=alternative.score;
+
+				return score;
+			})
+			.reduce((t,n)=>t+n);
 
 		await qql({
 			insertInto: "responses",
 			set: {
 				email: email,
-				answers: saveAnswers
+				answers: saveAnswers,
+				score: saveScore
 			}
 		});
+
+		let results=await qql({manyFrom: "results"});
+		for (let result of results)
+			if (!result.score)
+				result.score=0;
+
+		results.sort((a,b)=>a.score-b.score);
+		let saveResult=null;
+		for (let result of results)
+			if (saveScore>=result.score)
+				saveResult=result;
+
+		resultsVar.set(saveResult);
+		console.log(saveResult);
+
 		redirect(iso.getAppUrl(href));
 	}
 

@@ -8,6 +8,6 @@
   "dependencies": {
     "katnip-quickmin": "^3.0.36",
     "katnip-tailwind": "^3.0.24",
-    "katnip-quiz": "^1.0.0"
+    "katalyx-quiz": "^1.0.0"
   }
 }

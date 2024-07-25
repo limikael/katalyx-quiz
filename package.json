@@ -1,5 +1,6 @@
 {
-  "name": "katnip-quiz",
+  "name": "katalyx-quiz",
+  "description": "Quickly create a quiz for research or marketing.",
   "version": "1.0.7",
   "license": "MIT",
   "type": "module",
@@ -10,7 +11,7 @@
   "exports": {
     "./katnip-components": "./src/exports.jsx",
     "./katnip-snippets": "./src/snippets.js",
-    "./katnip-project-hooks": "./src/katnip-quiz-project.js"
+    "./katnip-project-hooks": "./src/katalyx-quiz-project.js"
   },
   "dependencies": {
     "katnip-components": "^3.0.18",

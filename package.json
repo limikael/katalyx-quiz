@@ -1,7 +1,7 @@
 {
   "name": "katalyx-quiz",
   "description": "Quickly create a quiz for research or marketing.",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "license": "MIT",
   "type": "module",
   "scripts": {},

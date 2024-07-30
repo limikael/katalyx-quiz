@@ -18,7 +18,7 @@ collections:
     fields:
       <Text id="title" listable fullWidth/>
       <Integer id="score" listable/>
-      <RichText id="content" fullWidth/>
+      <RichText id="content" fileUpload="false" fullWidth/>
 
   responses:
     access: [admin,public]

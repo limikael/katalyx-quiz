@@ -22,6 +22,17 @@ collections:
 
   responses:
     access: [admin,public]
+    actions:
+    - name: Export
+      type: module
+      url: /client.js
+      method: exportSelectedResults
+      scope: multiple
+    - name: Export All
+      type: module
+      url: /client.js
+      method: exportAllResults
+      scope: global
     fields:
       <Text id="email" listable fullWidth/>
       <Integer id="score" listable/>

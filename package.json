@@ -1,7 +1,7 @@
 {
   "name": "katalyx-quiz",
   "description": "Quickly create a quiz for research or marketing.",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "license": "MIT",
   "type": "module",
   "scripts": {},
@@ -11,11 +11,16 @@
   "exports": {
     "./katnip-components": "./src/exports.jsx",
     "./katnip-snippets": "./src/snippets.js",
-    "./katnip-project-hooks": "./src/katalyx-quiz-project.js"
+    "./katnip-project-hooks": "./src/katalyx-quiz-project.js",
+    "./isomain": "./src/isomain.js"
   },
   "dependencies": {
-    "katnip-components": "^3.0.18",
-    "katnip-quickmin": "^3.0.46",
+    "dayjs": "^1.11.12",
+    "file-saver": "^2.0.5",
+    "katnip-components": "^3.0.19",
+    "katnip-quickmin": "^3.0.47",
+    "katnip-tailwind": "^3.0.35",
+    "papaparse": "^5.4.1",
     "use-feather": "^1.0.3"
   }
 }

@@ -17,9 +17,9 @@ async function exportResponses({qql, responses}) {
 
 	let responsesArray=[];
 
-	responsesArray.push(["Email","Score",...questions]);
+	responsesArray.push(["Name","Email","Score","Tags",...questions]);
 	for (let response of responses) {
-		let row=[response.email,response.score];
+		let row=[response.name,response.email,response.score,response.tags];
 		let answerByQuestion=Object.fromEntries(response.answers.map(a=>[a.question,a.alternative]));
 
 		for (let q of questions)

@@ -39,6 +39,7 @@ collections:
       <Text id="name" listable fullWidth/>
       <Text id="email" listable fullWidth/>
       <Integer id="score" listable/>
+      <Text id="tags" listable fullWidth filter="substr" helperText="List of tags to be used by external systems, separated by space."/>
       <Json id="answers" fullWidth/>
 `;
 

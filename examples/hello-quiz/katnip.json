@@ -1,4 +1,4 @@
 {
-	//"qmMakeUi": true,
-	//"qmLocalBundle": true
+	"qmMakeUi": true,
+	"qmLocalBundle": true
 }

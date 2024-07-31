@@ -20,6 +20,7 @@ export function QuizEnv({completeModal, completeHref, children}) {
 		quizQuestions: quizQuestions,
 		quizLastQuestionNum: quizQuestions.length-1,
 		quizShowPopup: false,
+		quizName: "",
 		quizEmail: "",
 		quizCompleteModal: components[completeModal],
 		quizCompleteHref: completeHref
@@ -268,6 +269,21 @@ QuizNextButton.icon = {
 	symbol: "switch_left"
 }
 
+export function QuizNameInput({...props}) {
+	return (
+		<ValInput var="quizName" {...props}/>
+	);
+}
+
+QuizNameInput.editorPreview=props=><input {...props} value={"$name"}/>;
+QuizNameInput.styling=true;
+QuizNameInput.category="Quiz";
+QuizNameInput.displayName = "NameInput";
+QuizNameInput.icon = {
+	type: "material",
+	symbol: "badge"
+}
+
 export function QuizEmailInput({...props}) {
 	return (
 		<ValInput var="quizEmail" {...props}/>
@@ -285,6 +301,7 @@ QuizEmailInput.icon = {
 
 export function QuizSubmitButton({children, href, ...props}) {
 	let email=useVal("quizEmail");
+	let name=useVal("quizName");
 	let answers=useVal("quizAnswers");
 	let resultsVar=useVar("quizResult");
 	let completeHref=useVal("quizCompleteHref");
@@ -315,6 +332,7 @@ export function QuizSubmitButton({children, href, ...props}) {
 		await qql({
 			insertInto: "responses",
 			set: {
+				name: name,
 				email: email,
 				answers: saveAnswers,
 				score: saveScore

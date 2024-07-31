@@ -36,6 +36,7 @@ collections:
       method: exportAllResults
       scope: global
     fields:
+      <Text id="name" listable fullWidth/>
       <Text id="email" listable fullWidth/>
       <Integer id="score" listable/>
       <Json id="answers" fullWidth/>

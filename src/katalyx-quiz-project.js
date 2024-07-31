@@ -19,6 +19,8 @@ collections:
       <Text id="title" listable fullWidth/>
       <Integer id="score" listable/>
       <RichText id="content" fileUpload="false" fullWidth/>
+      <Text id="ctaText" helperText="Text for the Call To Action button"/>
+      <Text id="ctaHref" helperText="Link for the Call To Action button"/>
 
   responses:
     access: [admin,public]

@@ -6,7 +6,7 @@ import {Modal} from "./components.jsx";
 import {useRedirect} from "isoq-router";
 import {useComponentLibrary} from "katnip-components";
 
-export function QuizEnv({completeModal, children}) {
+export function QuizEnv({completeModal, completeHref, children}) {
 	let components=useComponentLibrary();
 	let qql=useQql();
 	let quizQuestions=useIsoMemo(()=>qql({manyFrom: "questions"}));
@@ -21,7 +21,8 @@ export function QuizEnv({completeModal, children}) {
 		quizLastQuestionNum: quizQuestions.length-1,
 		quizShowPopup: false,
 		quizEmail: "",
-		quizCompleteModal: components[completeModal]
+		quizCompleteModal: components[completeModal],
+		quizCompleteHref: completeHref
 	};
 
 	function createVarStates() {
@@ -45,7 +46,8 @@ export function QuizEnv({completeModal, children}) {
 QuizEnv.editorPreview=props=><>{props.children}</>;
 QuizEnv.category="Quiz";
 QuizEnv.controls={
-	completeModal: {type: "block"}
+	completeModal: {type: "block"},
+	completeHref: {}
 }
 QuizEnv.icon = {
 	type: "material",
@@ -91,6 +93,27 @@ QuizResult.category="Quiz";
 QuizResult.icon = {
 	type: "material",
 	symbol: "inbox_customize"
+}
+
+export function QuizResultCtaButton({class: cls}) {
+	let result=useVal("quizResult");
+
+	if (!result.ctaHref)
+		return;
+
+	return (
+		<a class={cls} href={result.ctaHref}>
+			{result.ctaText}
+		</a>
+	);
+}
+
+QuizResultCtaButton.editorPreview=props=><button class={props.class}>CALL TO ACTION</button>;
+QuizResultCtaButton.category="Quiz";
+QuizResultCtaButton.styling=true;
+QuizResultCtaButton.icon = {
+	type: "material",
+	symbol: "call_to_action"
 }
 
 export function QuizCarouselQuestions({children}) {
@@ -264,6 +287,7 @@ export function QuizSubmitButton({children, href, ...props}) {
 	let email=useVal("quizEmail");
 	let answers=useVal("quizAnswers");
 	let resultsVar=useVar("quizResult");
+	let completeHref=useVal("quizCompleteHref");
 	let qql=useQql();
 	let redirect=useRedirect();
 	let iso=useIsoContext();
@@ -311,7 +335,11 @@ export function QuizSubmitButton({children, href, ...props}) {
 		resultsVar.set(saveResult);
 		console.log(saveResult);
 
-		redirect(iso.getAppUrl(href));
+		if (href)
+			redirect(iso.getAppUrl(href));
+
+		else if (completeHref)
+			redirect(iso.getAppUrl(completeHref));
 	}
 
 	return (

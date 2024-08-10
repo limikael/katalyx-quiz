@@ -5,6 +5,27 @@ import {useQql} from "katnip-quickmin/react";
 import {Modal} from "./components.jsx";
 import {useRedirect} from "isoq-router";
 import {useComponentLibrary} from "katnip-components";
+import {createRpcProxy} from "fullstack-rpc/client";
+
+export function MailTestButton() {
+	let iso=useIsoContext();
+	let proxy=createRpcProxy({
+		fetch: iso.fetch,
+		url: iso.getAppUrl("quiz-functions")
+	});
+
+	async function handleClick() {
+		console.log("sending mail...");
+		let res=await proxy.testFunc();
+		console.log("func return: "+res);
+	}
+
+	return (
+		<button class="bg-azure p-10 rounded-full" onClick={handleClick}>Send a mail</button>
+	);
+}
+
+MailTestButton.editorPreview=props=><button class="bg-azure p-10 rounded-full">Send a mail</button>;
 
 export function QuizEnv({completeModal, completeHref, children}) {
 	let components=useComponentLibrary();

@@ -6,8 +6,8 @@
   "version": "1.0.0",
   "type": "module",
   "dependencies": {
-    "katalyx-quiz": "^1.0.8"
+    "katalyx-quiz": "^1.0.8",
+    "katnip-watch": "^3.0.22"
   },
-  "exports": {
-  }
+  "exports": {}
 }

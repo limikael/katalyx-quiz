@@ -4,7 +4,9 @@
   "version": "1.0.12",
   "license": "MIT",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "test": "jasmine"
+  },
   "keywords": [
     "katnip-plugin"
   ],
@@ -12,15 +14,25 @@
     "./katnip-components": "./src/exports.jsx",
     "./katnip-snippets": "./src/snippets.js",
     "./katnip-project-hooks": "./src/katalyx-quiz-project.js",
-    "./isomain": "./src/isomain.js"
+    "./katnip-server-hooks": "./src/katnip-quiz-server.js",
+    "./isomain": "./src/isomain.jsx"
   },
   "dependencies": {
+    "css": "^3.0.0",
     "dayjs": "^1.11.12",
     "file-saver": "^2.0.5",
+    "fullstack-rpc": "^1.0.1",
+    "html-email-transform": "^1.0.0",
+    "html-to-text": "^9.0.5",
     "katnip-components": "^3.0.19",
     "katnip-quickmin": "^3.0.49",
     "katnip-tailwind": "^3.0.35",
     "papaparse": "^5.4.1",
+    "preact-render-to-string": "^6.5.7",
+    "txml": "^5.1.1",
     "use-feather": "^1.0.3"
+  },
+  "devDependencies": {
+    "jasmine": "^5.2.0"
   }
 }

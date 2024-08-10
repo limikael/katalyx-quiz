@@ -44,6 +44,12 @@ collections:
 `;
 
 export async function quickminConf(conf, ev) {
-	console.log("Register quiz db...");
-	Object.assign(conf,quickminMergeConf(quizQuickminConf,conf));	
+    console.log("Register quiz db...");
+    Object.assign(conf,quickminMergeConf(quizQuickminConf,conf));	
+}
+
+build.priority=5;
+export async function build(ev) {
+    ev.options.exposeCjsxComponents=true;
+    ev.options.exposeIndexCss=true;
 }

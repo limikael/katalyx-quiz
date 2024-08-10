@@ -1,4 +1,6 @@
 {
-	"qmMakeUi": true,
-	"qmLocalBundle": true
+	//"qmMakeUi": true,
+	//"qmLocalBundle": true,
+	"mailServiceUrl": "http://localhost:3000/rpc",
+	"mailServiceKey": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsInJvbGUiOiJhZG1pbiIsInVzZXJOYW1lIjoibWlja2UifQ.3YtubxGmwSSDpcr4EQTEvx0DWPG6om_YEHubKSOsS3k"
 }

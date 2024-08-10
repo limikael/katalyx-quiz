@@ -1,11 +1,7 @@
-/*
-todo:
-2. add questions and header to csv
-*/
-
 import FileSaver from "file-saver";
 import Papa from 'papaparse';
 import dayjs from 'dayjs';
+import {useComponentLibrary} from "katnip-components";
 
 async function exportResponses({qql, responses}) {
 	let questions=[];

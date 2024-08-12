@@ -1,7 +1,7 @@
 {
   "name": "katalyx-quiz",
   "description": "Quickly create a quiz for research or marketing.",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "license": "MIT",
   "type": "module",
   "scripts": {
@@ -24,8 +24,8 @@
     "fullstack-rpc": "^1.0.2",
     "html-email-transform": "^1.0.1",
     "html-to-text": "^9.0.5",
-    "katnip-components": "^3.0.21",
-    "katnip-quickmin": "^3.0.51",
+    "katnip-components": "^3.0.22",
+    "katnip-quickmin": "^3.0.52",
     "katnip-tailwind": "^3.0.38",
     "papaparse": "^5.4.1",
     "preact-render-to-string": "^6.5.7",

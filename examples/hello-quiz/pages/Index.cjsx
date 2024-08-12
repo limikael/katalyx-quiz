@@ -1,6 +1,10 @@
 <Page route="/">
 	<div class="w-full font-bold bg-azure text-center p-10">Quiz Test</div>
-	<QuizEnv completeModal="QuizComplete">
+	<QuizEnv completeModal="QuizComplete"
+			emailTemplate="EmailTemplate"
+			emailSubject="Hello and thank you for taking the quiz"
+			emailFromName="Micke Quiz Maker"
+			emailFromMail="li.mikael.spam@gmail.com">
 		<div class="p-10">
 			<div class="mb-5">
 				<QuizCarouselQuestions>

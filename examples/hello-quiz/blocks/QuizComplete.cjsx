@@ -5,14 +5,20 @@
 		</div>
 
 		<div class="mb-5">
-			Please input your email address and we will contact you...
+			Please input your details and we will contact you...
 		</div>
 
 		<div class="mb-5">
+			<div class="text-sm font-bold text-left">Name</div>
+			<QuizNameInput class="border p-3 w-full"/>
+		</div>
+
+		<div class="mb-5">
+			<div class="text-sm font-bold text-left">Email</div>
 			<QuizEmailInput class="border p-3 w-full"/>
 		</div>
 
-		<QuizSubmitButton class="p-3 bg-azure rounded mx-5 w-32" href="/result">
+		<QuizSubmitButton class="p-3 bg-azure rounded mx-5" href="/result">
 			Get Results
 		</QuizSubmitButton>
 	</div>

@@ -1,11 +1,11 @@
-import {Env, ForCarousel, For, useVar, useVal, VarState, useEnv, ValInput} from "katnip-components";
+import {Env, ForCarousel, For, useVar, useVal, VarState, useEnv, ValInput, If} from "katnip-components";
 import {useConstructor} from "./react-util.jsx";
 import {useIsoMemo, useIsoContext} from "isoq";
 import {useQql} from "katnip-quickmin/react";
-import {Modal} from "./components.jsx";
 import {useRedirect} from "isoq-router";
 import {useComponentLibrary} from "katnip-components";
 import {createRpcProxy} from "fullstack-rpc/client";
+import {SpinnerButton, Modal, ModalProvider, useShowModal, useDismissModal, ErrorModal, useModalCatch} from "./site-utils.jsx";
 
 export function MailTestButton() {
 	let iso=useIsoContext();
@@ -27,7 +27,9 @@ export function MailTestButton() {
 
 MailTestButton.editorPreview=props=><button class="bg-azure p-10 rounded-full">Send a mail</button>;
 
-export function QuizEnv({completeModal, completeHref, children}) {
+export function QuizEnv({completeModal, completeHref,
+		emailTemplate, emailSubject, emailFromName, emailFromMail,
+		children}) {
 	let components=useComponentLibrary();
 	let qql=useQql();
 	let quizQuestions=useIsoMemo(()=>qql({manyFrom: "questions"}));
@@ -44,7 +46,11 @@ export function QuizEnv({completeModal, completeHref, children}) {
 		quizName: "",
 		quizEmail: "",
 		quizCompleteModal: components[completeModal],
-		quizCompleteHref: completeHref
+		quizCompleteHref: completeHref,
+		quizEmailTemplate: emailTemplate,
+		quizEmailSubject: emailSubject,
+		quizEmailFromName: emailFromName,
+		quizEmailFromMail: emailFromMail
 	};
 
 	function createVarStates() {
@@ -55,13 +61,24 @@ export function QuizEnv({completeModal, completeHref, children}) {
 
 	let CompleteModal=components[completeModal];
 
+	function QuizModal() {
+		let quizShowPopupVar=useVar("quizShowPopup");
+
+		if (quizShowPopupVar.get())
+			return (
+				<Modal onDismiss={()=>quizShowPopupVar.set(false)}>
+					<CompleteModal/>
+				</Modal>
+			);
+	}
+
 	return (
-		<Env declarations={declarations} createVarStates={createVarStates}>
-			{children}
-			<Modal showVar="quizShowPopup">
-				<CompleteModal/>
-			</Modal>
-		</Env>
+		<ModalProvider>
+			<Env declarations={declarations} createVarStates={createVarStates}>
+				{children}
+				<QuizModal/>
+			</Env>
+		</ModalProvider>
 	);
 }
 
@@ -69,7 +86,11 @@ QuizEnv.editorPreview=props=><>{props.children}</>;
 QuizEnv.category="Quiz";
 QuizEnv.controls={
 	completeModal: {type: "block"},
-	completeHref: {}
+	completeHref: {},
+	emailTemplate: {type: "block"},
+	emailSubject: {},
+	emailFromName: {},
+	emailFromMail: {},
 }
 QuizEnv.icon = {
 	type: "material",
@@ -120,7 +141,7 @@ QuizResult.icon = {
 export function QuizResultCtaButton({class: cls}) {
 	let result=useVal("quizResult");
 
-	if (!result.ctaHref)
+	if (!result || !result.ctaHref)
 		return;
 
 	return (
@@ -322,6 +343,10 @@ QuizEmailInput.icon = {
 
 export function QuizSubmitButton({children, href, ...props}) {
 	let email=useVal("quizEmail");
+	let emailTemplate=useVal("quizEmailTemplate");
+	let emailSubject=useVal("quizEmailSubject");
+	let emailFromName=useVal("quizEmailFromName");
+	let emailFromMail=useVal("quizEmailFromMail");
 	let name=useVal("quizName");
 	let answers=useVal("quizAnswers");
 	let resultsVar=useVar("quizResult");
@@ -329,48 +354,22 @@ export function QuizSubmitButton({children, href, ...props}) {
 	let qql=useQql();
 	let redirect=useRedirect();
 	let iso=useIsoContext();
+	let modalCatch=useModalCatch();
+	let dismissModal=useDismissModal();
+	let rpc=createRpcProxy({
+		fetch: iso.fetch,
+		url: iso.getAppUrl("quiz-functions")
+	});
 
 	async function handleClick() {
-		let questions=await qql({manyFrom: "questions"});
-		let alternatives=await qql({manyFrom: "alternatives"});
-		let alternativesById=Object.fromEntries(alternatives.map(a=>[a.id,a]));
-		let saveAnswers=questions.map(q=>({
-			question: q.question,
-			alternative: alternativesById[answers[q.id]]?.alternative,
-		}));
+		if (!email.trim())
+			throw new Error("Please enter a valid email address");
 
-		let saveScore=questions
-			.map(q=>{
-				let score=0;
-				let alternative=alternativesById[answers[q.id]];
-				if (alternative && alternative.score)
-					score=alternative.score;
-
-				return score;
-			})
-			.reduce((t,n)=>t+n);
-
-		await qql({
-			insertInto: "responses",
-			set: {
-				name: name,
-				email: email,
-				answers: saveAnswers,
-				score: saveScore
-			}
+		console.log("handle click");
+		let saveResult=await rpc.saveQuizResponse({
+			name, email, answers, 
+			emailTemplate, emailSubject, emailFromName, emailFromMail
 		});
-
-		let results=await qql({manyFrom: "results"});
-		for (let result of results)
-			if (!result.score)
-				result.score=0;
-
-		results.sort((a,b)=>a.score-b.score);
-		let saveResult=null;
-		for (let result of results)
-			if (saveScore>=result.score)
-				saveResult=result;
-
 		resultsVar.set(saveResult);
 		console.log(saveResult);
 
@@ -382,9 +381,9 @@ export function QuizSubmitButton({children, href, ...props}) {
 	}
 
 	return (
-		<button {...props} onClick={handleClick}>
+		<SpinnerButton {...props} onClick={handleClick}>
 			{children}
-		</button>
+		</SpinnerButton>
 	);
 }
 

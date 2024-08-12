@@ -18,6 +18,7 @@ collections:
     fields:
       <Text id="title" listable fullWidth/>
       <Integer id="score" listable/>
+      <Text id="tags" listable fullWidth filter="substr" helperText="List of tags to be used by external systems, separated by space."/>
       <RichText id="content" fileUpload="false" fullWidth/>
       <Text id="ctaText" helperText="Text for the Call To Action button"/>
       <Text id="ctaHref" helperText="Link for the Call To Action button"/>

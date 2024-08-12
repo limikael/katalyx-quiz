@@ -1,7 +1,6 @@
 import {transformHtmlEmail} from "html-email-transform";
 import {createRpcProxy} from "fullstack-rpc/client";
 import {convert as convertHtmlToText} from "html-to-text";
-//import fs from "fs";
 
 export default class Api {
 	constructor(ev) {
@@ -27,31 +26,6 @@ export default class Api {
 
 		return html;
 	}
-
-	/*async testFunc() {
-		let mailBody=this._renderMail("EmailTemplate",{name: "Micke"});
-		//fs.writeFileSync("/home/micke/Desktop/test.html",mailBody);
-		//console.log(mailBody);
-		//await this._sendMail(mailBody);
-
-		let rpc=createRpcProxy({
-			url: this.ev.options.mailServiceUrl,
-			headers: {
-				"authorization": "Bearer "+this.ev.options.mailServiceKey
-			}
-		});
-		await rpc.sendMail({
-			fromMail: "li.mikael.spam@gmail.com",
-			fromName: "Micke Spammer",
-			toMail: "li.mikael@gmail.com",
-			toName: "Mikael",
-			subject: "Testing Mail",
-			htmlbody: mailBody,
-			textbody: convertHtmlToText(mailBody)
-		});
-
-		return 123;
-	}*/
 
 	async saveQuizResponse({name, email, answers, 
 			emailTemplate, emailSubject, emailFromName, emailFromMail}) {
@@ -82,11 +56,12 @@ export default class Api {
 				result.score=0;
 
 		results.sort((a,b)=>a.score-b.score);
-		let saveResult=null;
+		let resResult=null;
 		for (let result of results)
 			if (saveScore>=result.score)
-				saveResult=result;
+				resResult=result;
 
+		let saveResult=resResult;
 		if (!saveResult)
 			saveResult={};
 
@@ -126,6 +101,6 @@ export default class Api {
 
 		}
 
-		return saveResult;
+		return resResult;
 	}
 }

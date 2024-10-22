@@ -5,10 +5,9 @@ collections:
   questions:
     fields:
       <Text id="question" listable fullWidth/>
-      <ReferenceMany id="alternatives" reference="alternatives" target="question_id"/>
+      <ReferenceMany id="alternativ" reference="alternatives" target="question_id"/>
 
   alternatives:
-    category: hidden
     fields:
       <Reference id="question_id" reference="questions" disabled/>
       <Text id="alternative" listable fullWidth/>
